@@ -1,88 +1,5 @@
-import Image from "next/image";
 import { getProducts } from "@/server/db";
-
-// list of products
-interface CardPictureProps {
-  src: string;
-  alt: string;
-}
-function CardPicture({ src, alt }: CardPictureProps) {
-  return (
-    <Image src={src} alt={alt} fill={true} style={{ borderRadius: "6.46px" }} />
-  );
-}
-
-interface CardProps {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  discount: number;
-  image: {
-    src: string;
-    alt: string;
-  };
-}
-function Card({ id, name, description, price, discount, image }: CardProps) {
-  return (
-    <li className="flex h-fit w-fit flex-col gap-[10px] rounded-[6.46px] border-[0.65px] border-[#DBDBDB] p-[10px]">
-      <div className="relative h-[149px] w-[282px]">
-        <div className="absolute h-full w-full rounded-[6.46px]">
-          <CardPicture src={image.src} alt={image.alt} />
-        </div>
-        <div className="absolute right-[10px] top-[10px] rounded-full bg-[#6100FF] px-[16.16px] py-[4.52px] text-[14px] font-[600] text-white">
-          {-1 * discount} %
-        </div>
-      </div>
-      <div className="flex w-[282px] gap-[4px]">
-        <div className="grow flex-col">
-          <h2 className="line-clamp-1 text-[20px] font-[600]">{name}</h2>
-          <p className="line-clamp-2 min-h-[46px] text-[14px] font-[500]">
-            {description}
-          </p>
-        </div>
-        <p className="text-[24px] font-[600]">{price}&nbsp;$</p>
-      </div>
-      <a
-        href={`/product/${id}`}
-        className="flex justify-center rounded-full bg-black pb-[8px] pt-[10px] text-[16px] font-[600] text-white"
-      >
-        See details
-      </a>
-    </li>
-  );
-}
-
-export async function List() {
-  const data = await getProducts();
-
-  return (
-    <ul className="grid-cols-shop grid justify-center gap-[16px] p-10 px-[87px]">
-      {data.map((item) => (
-        <Card
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-          discount={item.discount}
-          image={item.image}
-        />
-      ))}
-      {data.map((item) => (
-        <Card
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-          discount={item.discount}
-          image={item.image}
-        />
-      ))}
-    </ul>
-  );
-}
+import { Card } from "./card";
 
 // loading state
 function Skeleton() {
@@ -133,3 +50,34 @@ export function HomeLoading() {
   );
 }
 
+// product list
+export async function List() {
+  const products = await getProducts();
+
+  return (
+    <ul className="grid-cols-shop grid justify-center gap-[16px] p-10 px-[87px]">
+      {products.map((item) => (
+        <Card
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          description={item.description}
+          price={item.price}
+          discount={item.discount}
+          image={item.images[0]}
+        />
+      ))}
+      {products.map((item) => (
+        <Card
+          key={item.id}
+          id={item.id}
+          name={item.name}
+          description={item.description}
+          price={item.price}
+          discount={item.discount}
+          image={item.images[0]}
+        />
+      ))}
+    </ul>
+  );
+}

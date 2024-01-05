@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { List, HomeLoading } from "@/components/home";
+import { HomeLoading, List } from "@/components/home";
 
 export default function HomePage() {
   return (

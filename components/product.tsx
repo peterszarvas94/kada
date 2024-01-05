@@ -1,116 +1,15 @@
-import Image from "next/image";
-import { ProductType, getProduct } from "@/server/db";
-
-// visual elements
-interface StarProps {
-  filled: boolean;
-}
-function Star({ filled }: StarProps) {
-  return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.4261 1.0215C11.6777 0.573722 12.3223 0.573722 12.5739 1.0215L15.9705 7.06759C16.0645 7.23494 16.2269 7.35291 16.4151 7.39061L23.2149 8.75266C23.7185 8.85353 23.9177 9.46661 23.5696 9.84422L18.869 14.943C18.7389 15.0841 18.6769 15.275 18.6992 15.4656L19.5051 22.3535C19.5647 22.8636 19.0432 23.2425 18.5765 23.0281L12.2748 20.1332C12.1004 20.0531 11.8996 20.0531 11.7252 20.1332L5.42348 23.0281C4.95677 23.2425 4.43526 22.8636 4.49494 22.3535L5.30081 15.4656C5.32311 15.275 5.26109 15.0841 5.13099 14.943L0.430434 9.84422C0.0823079 9.46661 0.281507 8.85353 0.785105 8.75266L7.5849 7.39061C7.77311 7.35291 7.93548 7.23494 8.02949 7.06759L11.4261 1.0215Z"
-        fill={filled ? "#6100FF" : "#D9D9D9"}
-      />
-    </svg>
-  );
-}
-
-interface ChevronLeftProps {
-  enabled: boolean;
-}
-function ChevronLeft({ enabled }: ChevronLeftProps) {
-  return (
-    <svg
-      width="20"
-      height="33"
-      viewBox="0 0 20 33"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M17.4207 2.0793L3 16.5L17.4207 30.9207"
-        stroke="#323232"
-        stroke-opacity={enabled ? 1 : 0.6}
-        stroke-width="3.72147"
-        stroke-linecap="round"
-      />
-    </svg>
-  );
-}
-
-interface ChevronRightProps {
-  enabled: boolean;
-}
-function ChevronRight({ enabled }: ChevronRightProps) {
-  return (
-    <svg
-      width="20"
-      height="34"
-      viewBox="0 0 20 34"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.73885 31.4081L17.1595 16.9874L2.73885 2.56673"
-        stroke="#323232"
-        stroke-opacity={enabled ? 1 : 0.6}
-        stroke-width="3.72147"
-        stroke-linecap="round"
-      />
-    </svg>
-  );
-}
-
-interface RatingProps {
-  rating: number;
-}
-function Rating({ rating }: RatingProps) {
-  return (
-    <div className="flex items-center gap-2">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star filled={i + 1 < rating} key={i} />
-      ))}
-      <span className="pl-2 pt-1 text-[24px] font-[600]">{rating}</span>
-    </div>
-  );
-}
-
-interface CircleProps {
-  filled: boolean;
-}
-function Circle({ filled }: CircleProps) {
-  return (
-    <svg
-      width="11"
-      height="11"
-      viewBox="0 0 12 12"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        cx="5.48596"
-        cy="5.48596"
-        r="5.48596"
-        fill={filled ? "#6100FF" : "#323232"}
-        opacity={filled ? 1 : 0.6}
-      />
-    </svg>
-  );
-}
+import type { ProductType } from "@/server/db";
+import { Slider } from "./slider";
+import { notFound } from "next/navigation";
+import { Rating } from "./rating";
+import { getProductFromId } from "@/utils/product";
 
 // loading state
 export function DetailsLoading() {
   return (
     <main
       role="status"
-      className="flex min-h-screen animate-pulse items-center justify-center"
+      className="flex min-h-screen animate-pulse items-center justify-center py-10"
     >
       <div className="flex w-full max-w-6xl items-start justify-start gap-8 px-2">
         <div className="flex flex-col gap-4">
@@ -183,47 +82,17 @@ interface DetailsProp {
   idStr: string;
 }
 export async function Details({ idStr }: DetailsProp) {
-  const id = parseInt(idStr);
-  if (isNaN(id)) {
-    return <div>ID is invalid</div>;
-  }
-
-  let product: ProductType | undefined;
+  let product: ProductType;
   try {
-    product = await getProduct(id);
+    product = await getProductFromId(idStr);
   } catch (err) {
-    return <div>Product not found</div>;
+    notFound();
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main className="flex min-h-screen items-center justify-center py-10">
       <div className="flex w-full max-w-6xl items-start justify-start gap-10 px-2">
-        <div className="flex flex-col gap-4">
-          {/* image slider */}
-          <div className="flex">
-            <button className="flex w-14 items-center justify-start">
-              <ChevronLeft enabled={false} />
-            </button>
-            <div className="relative h-[502px] w-[481px]">
-              <Image
-                src={product.image.src}
-                alt={product.image.alt}
-                fill={true}
-                style={{ borderRadius: "6.01px", objectFit: "cover" }}
-              />
-            </div>
-            <button className="flex w-14 items-center justify-end">
-              <ChevronRight enabled={true} />
-            </button>
-          </div>
-
-          {/* circles */}
-          <div className="flex justify-center gap-2">
-            {Array.from({ length: 3 }).map((_, i) => (
-              <Circle filled={i === 0} key={i} />
-            ))}
-          </div>
-        </div>
+        <Slider images={product.images} />
 
         {/* right side */}
         <div className="flex min-h-[516px] grow flex-col justify-between gap-3">

@@ -1,16 +1,11 @@
 import type { Metadata } from 'next'
-import localFont from 'next/font/local'
 import './globals.css'
+import { generalSans } from '@/font'
 
 export const metadata: Metadata = {
-  title: 'Mock Webshop',
-  description: 'This is my solution to the Kada Solutuions hiring task'
+  title: 'Our products - The Cool Shop',
+  description: 'Very cool shop indeed',
 }
-
-const generalSans = localFont({
-  src: '../font/GeneralSans-Variable.ttf',
-  display: 'swap',
-})
 
 export default function RootLayout({
   children,
