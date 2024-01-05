@@ -18,7 +18,7 @@ const data: ProductType[] = [
   {
     id: 1,
     name: "iPhone9",
-    description: "An apple mobile",
+    description: "An apple mobile which is nothig like apple",
     price: 549,
     discount: 12.96,
     image: {
