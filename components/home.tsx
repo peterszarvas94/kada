@@ -60,6 +60,7 @@ export async function List() {
     <ul className="grid-cols-shop grid justify-center gap-[16px] p-10 px-[87px]">
       {data.map((item) => (
         <Card
+          key={item.id}
           id={item.id}
           name={item.name}
           description={item.description}
@@ -70,6 +71,7 @@ export async function List() {
       ))}
       {data.map((item) => (
         <Card
+          key={item.id}
           id={item.id}
           name={item.name}
           description={item.description}

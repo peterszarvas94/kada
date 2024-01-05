@@ -75,7 +75,7 @@ function Rating({ rating }: RatingProps) {
   return (
     <div className="flex items-center gap-2">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star filled={i + 1 < rating} />
+        <Star filled={i + 1 < rating} key={i} />
       ))}
       <span className="pl-2 pt-1 text-[24px] font-[600]">{rating}</span>
     </div>
@@ -220,7 +220,7 @@ export async function Details({ idStr }: DetailsProp) {
           {/* circles */}
           <div className="flex justify-center gap-2">
             {Array.from({ length: 3 }).map((_, i) => (
-              <Circle filled={i === 0} />
+              <Circle filled={i === 0} key={i} />
             ))}
           </div>
         </div>
