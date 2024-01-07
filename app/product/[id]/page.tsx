@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Details, DetailsLoading } from "@/components/product";
+import { ProductDetails, ProductDetailsLoading } from "@/components/product-details-loading";
 import { Metadata } from "next";
 import { getProduct } from "@/server/db";
 
@@ -28,8 +28,8 @@ interface ProductPageProps {
 }
 export default function ProductPage({ params }: ProductPageProps) {
   return (
-    <Suspense fallback={<DetailsLoading />}>
-      <Details idStr={params.id} />
+    <Suspense fallback={<ProductDetailsLoading />}>
+      <ProductDetails idStr={params.id} />
     </Suspense>
   );
 }

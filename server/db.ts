@@ -16,10 +16,10 @@ export const productSchema = z.object({
 export type ProductType = z.infer<typeof productSchema>;
 
 export const productsSchema = z.array(productSchema);
-export type ProductsType= z.infer<typeof productsSchema>;
+export type ProductsType = z.infer<typeof productsSchema>;
 
-export async function getProducts(): Promise<ProductsType> {
-  const res = await fetch("https://dummyjson.com/products");
+export async function getProducts(limit: number = 0, skip: number = 0): Promise<ProductsType> {
+  const res = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
   const data = await res.json();
   const rawProducts = data.products;
 
@@ -35,4 +35,3 @@ export async function getProduct(id: string): Promise<ProductType> {
   const product = productSchema.parse(rawProduct);
   return product;
 }
-

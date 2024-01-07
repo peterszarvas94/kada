@@ -9,7 +9,7 @@ import HomeButton from "./home-button";
 import { CartContextWrapper } from "./cart-context-wrapper";
 
 // loading state
-export function DetailsLoading() {
+export function ProductDetailsLoading() {
   return (
     <main
       role="status"
@@ -82,10 +82,10 @@ export function DetailsLoading() {
 }
 
 // product details
-interface DetailsProp {
+interface ProductDetailsProp {
   idStr: string;
 }
-export async function Details({ idStr }: DetailsProp) {
+export async function ProductDetails({ idStr }: ProductDetailsProp) {
   let product: ProductType;
   try {
     product = await getProduct(idStr);
@@ -151,4 +151,3 @@ export async function Details({ idStr }: DetailsProp) {
     </CartContextWrapper>
   );
 }
-

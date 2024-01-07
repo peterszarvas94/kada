@@ -1,10 +1,9 @@
 import { Suspense } from "react";
-import { HomeLoading, List } from "@/components/home";
+import { HomeLoading, ListWrapper } from "@/components/home-loading";
 import { CartButton } from "@/components/cart-button";
 import { CartContextWrapper } from "@/components/cart-context-wrapper";
 
 export default function HomePage() {
-
   return (
     <CartContextWrapper>
       <main className="relative">
@@ -15,7 +14,7 @@ export default function HomePage() {
           </h1>
         </div>
         <Suspense fallback={<HomeLoading />}>
-          <List />
+          <ListWrapper />
         </Suspense>
       </main>
     </CartContextWrapper>

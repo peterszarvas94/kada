@@ -1,5 +1,5 @@
 import { getProducts } from "@/server/db";
-import { Card } from "./card";
+import { List } from "./list";
 
 // loading state
 function Skeleton() {
@@ -50,34 +50,8 @@ export function HomeLoading() {
   );
 }
 
-// product list
-export async function List() {
-  const products = await getProducts();
+export async function ListWrapper() {
+  const products = await getProducts(8);
 
-  return (
-    <ul className="grid-cols-shop grid justify-center gap-[16px] p-10 px-[87px]">
-      {products.map((product) => (
-        <Card
-          key={product.id}
-          id={product.id}
-          name={product.title}
-          description={product.description}
-          price={product.price}
-          discount={product.discountPercentage}
-          image={{src: product.thumbnail, alt: product.title}}
-        />
-      ))}
-      {products.map((product) => (
-        <Card
-          key={product.id}
-          id={product.id}
-          name={product.title}
-          description={product.description}
-          price={product.price}
-          discount={product.discountPercentage}
-          image={{src: product.thumbnail, alt: product.title}}
-        />
-      ))}
-    </ul>
-  );
+  return <List initialProducts={products} />;
 }
