@@ -1,4 +1,4 @@
-import { createUser } from "@/server/firebase";
+// import { createUser } from "@/server/firebase";
 import { redirect } from "next/navigation";
 
 export default function SignupPage() {
@@ -22,8 +22,8 @@ export default function SignupPage() {
     }
 
     try {
-      const user = await createUser(email, password);
-      console.log(user);
+      // const user = await createUser(email, password);
+      // console.log(user);
     } catch (error) {
       console.error("Something went wrong");
       return;

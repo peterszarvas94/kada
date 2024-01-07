@@ -1,4 +1,4 @@
-import { loginUser } from "@/server/firebase";
+// import { loginUser } from "@/server/firebase";
 import { cookies, headers } from "next/headers";
 
 export default function SigninPage() {
@@ -30,7 +30,7 @@ export default function SigninPage() {
     }
 
     try {
-      const user = await loginUser(email, password);
+      // const user = await loginUser(email, password);
       // const accessToken = await user.getIdTokenResult();
       // const refreshToken = user.refreshToken;
 
