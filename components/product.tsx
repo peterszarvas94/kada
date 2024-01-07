@@ -1,8 +1,12 @@
 import type { ProductType } from "@/server/db";
+import { getProduct } from "@/server/db";
 import { Slider } from "./slider";
 import { notFound } from "next/navigation";
 import { Rating } from "./rating";
-import { getProductFromId } from "@/utils/product";
+import { CartButton } from "./cart-button";
+import AddToCart from "./add-to-cart";
+import HomeButton from "./home-button";
+import { CartContextWrapper } from "./cart-context-wrapper";
 
 // loading state
 export function DetailsLoading() {
@@ -84,67 +88,67 @@ interface DetailsProp {
 export async function Details({ idStr }: DetailsProp) {
   let product: ProductType;
   try {
-    product = await getProductFromId(idStr);
+    product = await getProduct(idStr);
   } catch (err) {
     notFound();
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center py-10">
-      <div className="flex w-full max-w-6xl items-start justify-start gap-10 px-2">
-        <Slider images={product.images} />
+    <CartContextWrapper>
+      <main className="relative flex min-h-screen items-center justify-center py-10">
+        <HomeButton />
+        <CartButton />
+        <div className="flex w-full max-w-6xl items-start justify-start gap-10 px-2">
+          <Slider images={product.images} alt={product.title} />
 
-        {/* right side */}
-        <div className="flex min-h-[516px] grow flex-col justify-between gap-3">
-          {/* name and rating */}
-          <div className="flex grow items-end">
-            <div className="flex w-full items-center justify-between gap-16">
-              <h1 className="text-[48px] font-[600]">{product.name}</h1>
-              <Rating rating={product.rating} />
+          {/* right side */}
+          <div className="flex min-h-[516px] grow flex-col justify-between gap-3">
+            {/* name and rating */}
+            <div className="flex grow items-end">
+              <div className="flex w-full items-center justify-between gap-16">
+                <h1 className="text-[48px] font-[600]">{product.title}</h1>
+                <Rating rating={product.rating} />
+              </div>
             </div>
-          </div>
 
-          {/* description */}
-          <p className="max-w-sm text-[24px] font-[500]">
-            {product.description}
-          </p>
+            {/* description */}
+            <p className="max-w-sm text-[24px] font-[500]">
+              {product.description}
+            </p>
 
-          {/* stock */}
-          <p className="text-[24px] font-[500] opacity-60">
-            Stock: {product.stock}
-          </p>
+            {/* stock */}
+            <p className="text-[24px] font-[500] opacity-60">
+              Stock: {product.stock}
+            </p>
 
-          {/* brand */}
-          <p className="text-[24px] font-[500] opacity-60">
-            Brand: {product.brand}
-          </p>
+            {/* brand */}
+            <p className="text-[24px] font-[500] opacity-60">
+              Brand: {product.brand}
+            </p>
 
-          {/* category */}
-          <p className="text-[24px] font-[500] opacity-60">
-            Category: {product.category}
-          </p>
+            {/* category */}
+            <p className="text-[24px] font-[500] opacity-60">
+              Category: {product.category}
+            </p>
 
-          {/* discount */}
-          <div className="pt-6">
-            <div className="w-fit rounded-full bg-[#6100FF] px-[20px] py-[7.63px] text-[20px] font-[600] text-white">
-              {-1 * product.discount} %
+            {/* discount */}
+            <div className="pt-6">
+              <div className="w-fit rounded-full bg-[#6100FF] px-[20px] py-[7.63px] text-[20px] font-[600] text-white">
+                {-1 * product.discountPercentage} %
+              </div>
             </div>
-          </div>
 
-          {/* price */}
-          <div className="flex grow justify-between">
-            <div className="text-[64px] font-[600] text-[#323232]">
-              {product.price} $
-            </div>
-            <div className="pt-4">
-              <button className="h-fit w-fit rounded-full bg-black px-14 py-3 text-[28px] font-[600] text-white">
-                Add to cart
-              </button>
+            {/* price */}
+            <div className="flex grow justify-between">
+              <div className="text-[64px] font-[600] text-[#323232]">
+                {product.price} $
+              </div>
+              <AddToCart item={product} />
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </CartContextWrapper>
   );
 }
 

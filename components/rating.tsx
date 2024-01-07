@@ -32,3 +32,4 @@ export function Rating({ rating }: RatingProps) {
     </div>
   );
 }
+

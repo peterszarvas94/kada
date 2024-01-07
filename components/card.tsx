@@ -6,7 +6,7 @@ interface CardPictureProps {
 }
 function CardPicture({ src, alt }: CardPictureProps) {
   return (
-    <Image src={src} alt={alt} fill={true} style={{ borderRadius: "6.46px" }} />
+    <Image src={src} alt={alt} fill={true} style={{ borderRadius: "6.46px", objectFit: "cover" }} />
   );
 }
 

@@ -56,26 +56,26 @@ export async function List() {
 
   return (
     <ul className="grid-cols-shop grid justify-center gap-[16px] p-10 px-[87px]">
-      {products.map((item) => (
+      {products.map((product) => (
         <Card
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-          discount={item.discount}
-          image={item.images[0]}
+          key={product.id}
+          id={product.id}
+          name={product.title}
+          description={product.description}
+          price={product.price}
+          discount={product.discountPercentage}
+          image={{src: product.thumbnail, alt: product.title}}
         />
       ))}
-      {products.map((item) => (
+      {products.map((product) => (
         <Card
-          key={item.id}
-          id={item.id}
-          name={item.name}
-          description={item.description}
-          price={item.price}
-          discount={item.discount}
-          image={item.images[0]}
+          key={product.id}
+          id={product.id}
+          name={product.title}
+          description={product.description}
+          price={product.price}
+          discount={product.discountPercentage}
+          image={{src: product.thumbnail, alt: product.title}}
         />
       ))}
     </ul>

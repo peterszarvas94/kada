@@ -4,7 +4,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "fakeimg.pl",
+        hostname: "i.dummyjson.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.dummyjson.com",
         port: "",
       },
     ],

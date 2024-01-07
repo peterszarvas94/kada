@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import type { ImageType } from "@/server/db";
 import { ChevronLeft, ChevronRight } from "./chevron";
 import { Circle } from "./circle";
 
 interface SliderProps {
-  images: ImageType[];
+  images: string[];
+  alt: string;
 }
 
-export function Slider({ images }: SliderProps) {
+export function Slider({ images, alt }: SliderProps) {
   const [index, setIndex] = useState(0);
 
   return (
@@ -31,8 +31,8 @@ export function Slider({ images }: SliderProps) {
           {images.map((image, i) => (
             <Image
               key={i}
-              src={image.src}
-              alt={image.alt}
+              src={image}
+              alt={alt}
               fill={true}
               style={{
                 borderRadius: "6.01px",
@@ -62,7 +62,7 @@ export function Slider({ images }: SliderProps) {
             onClick={() => setIndex(i)}
             aria-label={`image ${i + 1}`}
             key={i}
-            className="flex w-6 h-6 items-center justify-center"
+            className="flex h-6 w-6 items-center justify-center"
           >
             <Circle filled={i === index} />
           </button>
