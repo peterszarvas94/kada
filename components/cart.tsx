@@ -20,21 +20,28 @@ export default function Cart() {
       {!isLoaded ? (
         <CartLoading />
       ) : (
-        <div className="flex p-10 w-full justify-center">
+        <div className="flex w-full justify-center p-10">
           <div className="flex w-full max-w-6xl gap-10">
             <div className="flex grow flex-col gap-4 ">
-              {cart.map((item) => (
-                <CartItem
-                  key={item.product.id}
-                  product={item.product}
-                  quantity={item.quantity}
-                />
-              ))}
+              {cart.length === 0 ? (
+                <div className="flex items-center px-8 h-[102px] rounded-[6.46px] border-[0.65px] border-[#DBDBDB] text-lg">
+                  No items in cart
+                </div>
+              ) : (
+                cart.map((item) => (
+                  <CartItem
+                    key={item.product.id}
+                    product={item.product}
+                    quantity={item.quantity}
+                  />
+                ))
+              )}
             </div>
-            <div className="flex flex-col min-w-32 items-end gap-4">
+            <div className="min-w-32 flex flex-col items-end gap-4">
               <h2 className="text-xl font-semibold">
                 {`Total: ${cart.reduce(
-                  (acc, { product, quantity }) => acc + product.price * quantity,
+                  (acc, { product, quantity }) =>
+                    acc + product.price * quantity,
                   0,
                 )} $`}
               </h2>
