@@ -9,9 +9,10 @@ import { SignOutButton } from "./sign-out-button";
 import { SignInButton } from "./sign-in-button";
 import { SignInForm } from "./sign-in-form";
 import { SignUpForm } from "./sign-up-form";
+import { clearCartFromLocalStorage } from "@/client/local-storage";
 
 export function Cart() {
-  const { cart, cartLoaded } = useCartContext();
+  const { cart, cartLoaded, setCart } = useCartContext();
   const { user, overlay, setOverlay } = useAuthContext();
 
   if (overlay === "sign-in-form" && !user) {
@@ -65,6 +66,8 @@ export function Cart() {
                 onClick={() => {
                   if (user) {
                     alert("Thank you for your purchase!");
+                    setCart([]);
+                    clearCartFromLocalStorage();
                   } else {
                     setOverlay("sign-in-form");
                   }
