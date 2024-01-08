@@ -4,7 +4,7 @@ import { useCartContext } from "@/client/cart-context";
 
 export function CartButton() {
 
-  const { cart, isLoaded } = useCartContext();
+  const { cart, cartLoaded: isLoaded } = useCartContext();
 
   return (
     <div className="absolute right-10 top-10">

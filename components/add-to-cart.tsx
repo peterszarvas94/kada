@@ -8,7 +8,7 @@ interface AddToCartProps {
   item: ProductType;
 }
 export default function AddToCart({ item }: AddToCartProps) {
-  const { cart, setCart, isLoaded } = useCartContext();
+  const { cart, setCart, cartLoaded: isLoaded } = useCartContext();
 
   return (
     <div className="pt-4">

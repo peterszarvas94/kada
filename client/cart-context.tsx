@@ -25,7 +25,7 @@ type Context = {
   cart: CartType;
   setCart: Dispatch<SetStateAction<CartType>>;
 
-  isLoaded: boolean;
+  cartLoaded: boolean;
 };
 
 export const CartContext = createContext<Context | null>(null);
@@ -36,21 +36,21 @@ interface Props {
 
 export function CartContextProvider({ children }: Props) {
   const [cart, setCart] = useState<CartType>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [cartLoaded, setCartLoaded] = useState(false);
 
   useEffect(() => {
     const cart = getCartFromLocalStorage();
     setCart(cart);
-    setIsLoaded(true);
+    setCartLoaded(true);
   }, []);
 
   return (
     <CartContext.Provider
       value={{
-        cart: cart,
-        setCart: setCart,
+        cart,
+        setCart,
 
-        isLoaded: isLoaded,
+        cartLoaded,
       }}
     >
       {children}
