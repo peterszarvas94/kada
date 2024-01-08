@@ -98,7 +98,7 @@ export async function ProductDetails({ idStr }: ProductDetailsProp) {
       <main className="relative flex min-h-screen items-center justify-center py-10">
         <HomeButton />
         <CartButton />
-        <div className="flex w-full max-w-6xl items-start justify-start gap-10 px-2">
+        <div className="flex w-full max-w-6xl sm:items-start sm:justify-start flex-col sm:flex-row gap-10 px-2">
           <Slider images={product.images} alt={product.title} />
 
           {/* right side */}

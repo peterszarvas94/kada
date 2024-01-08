@@ -96,7 +96,7 @@ export function SignInForm() {
           </button>
         </form>
         <div className="mt-4 flex gap-2">
-          <span>Don't have an account?</span>
+          <span>Don&apos;t have an account?</span>
           <button
             onClick={() => setOverlay("sign-up-form")}
             className="text-blue-500 hover:text-blue-600"

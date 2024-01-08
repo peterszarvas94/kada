@@ -40,7 +40,7 @@ export function List({ initialProducts }: ListProps) {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [products]);
+  }, [products, loading, noMore]);
 
   return (
     <>
