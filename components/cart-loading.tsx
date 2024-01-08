@@ -1,9 +1,9 @@
 function CartSkeleton() {
   return (
 
-    <div className="flex items-center gap-4 rounded-[6.46px] border-[0.65px] border-[#DBDBDB] p-[10px]">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-[6.46px] border-[0.65px] border-[#DBDBDB] p-[10px]">
       {/* image */}
-      <div className="flex h-20 w-20 items-center justify-center rounded-[6.01px] bg-gray-300">
+      <div className="hidden sm:flex h-20 w-20 items-center justify-center rounded-[6.01px] bg-gray-300">
         <svg
           className="h-8 w-8 text-gray-400"
           aria-hidden="true"
@@ -24,17 +24,17 @@ function CartSkeleton() {
       </div>
 
       {/* buttons */}
-      <div className="h-6 w-36 rounded-full bg-gray-300" />
+      <div className="h-6 w-36 rounded-full bg-gray-300 self-end sm:self-auto" />
     </div>
   );
 }
 
 export default function CartLoading() {
   return (
-    <div className="flex p-10 w-full justify-center animate-pulse">
-      <div className="flex w-full max-w-6xl gap-10">
+    <div className="flex w-full justify-center p-10">
+      <div className="flex flex-col sm:flex-row w-full max-w-6xl gap-10">
         {/* left side */}
-        <div className="flex grow flex-col gap-4 ">
+        <div className="flex grow flex-col gap-4">
           {/* cart items */}
           {Array.from({ length: 3 }).map((_, index) => (
             <CartSkeleton key={index} />
@@ -44,7 +44,7 @@ export default function CartLoading() {
         </div>
 
         {/* right side */}
-        <div className="flex flex-col pt-1 w-32 items-end gap-4">
+        <div className="flex flex-col pt-1 w-32 items-end self-end sm:self-auto gap-4">
           <div className="h-6 w-20 rounded-full bg-gray-300" />
           <div className="h-10 w-[106px] rounded-full bg-gray-300" />
         </div>

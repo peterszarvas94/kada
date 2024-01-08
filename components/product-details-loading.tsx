@@ -13,14 +13,14 @@ export function ProductDetailsLoading() {
   return (
     <main
       role="status"
-      className="flex min-h-screen animate-pulse items-center justify-center py-10"
+      className="flex min-h-screen animate-pulse items-center justify-center py-24"
     >
-      <div className="flex w-full max-w-6xl items-start justify-start gap-8 px-2">
+      <div className="flex flex-col xl:flex-row max-w-6xl items-center sm:items-start sm:justify-start gap-10 px-2">
         <div className="flex flex-col gap-4">
           {/* image slider */}
           <div className="flex pb-6">
             <span className="w-14" />
-            <div className="flex h-[502px] w-[481px] items-center justify-center rounded-[6.01px] bg-gray-300">
+            <div className="flex h-52 w-52 sm:h-[502px] sm:w-[481px] items-center justify-center rounded-[6.01px] bg-gray-300">
               <svg
                 className="h-10 w-10 text-gray-400"
                 aria-hidden="true"
@@ -38,15 +38,15 @@ export function ProductDetailsLoading() {
         {/* right side */}
         <div className="flex min-h-[516px] grow flex-col justify-between gap-3">
           {/* name and rating */}
-          <div className="flex h-[103px] w-full items-end justify-between pb-4">
+          <div className="flex h-[176px] sm:h-[103px] w-full flex-col sm:flex-row items-center sm:items-end justify-between pb-4">
             <div className="h-[50px] w-40 rounded-full bg-gray-300" />
-            <div className="pb-[13px]">
+            <div className="sm:pb-[13px]">
               <div className="h-[24px] w-56 rounded-full bg-gray-300" />
             </div>
           </div>
 
           {/* description */}
-          <div className="flex h-[36px] items-center">
+          <div className="flex h-[36px]  items-center">
             <div className="h-[24px] w-40 rounded-full bg-gray-300" />
           </div>
 
@@ -61,17 +61,17 @@ export function ProductDetailsLoading() {
           </div>
 
           {/* category */}
-          <div className="flex h-[36px] items-center">
+          <div className="flex h-[36px]  items-center">
             <div className="h-[24px] w-40 rounded-full bg-gray-300" />
           </div>
 
           {/* discount */}
-          <div className="pt-6">
+          <div className="pt-6 ">
             <div className="h-[45px] w-[118px] rounded-full bg-gray-300" />
           </div>
 
           {/* price */}
-          <div className="flex w-full items-center justify-between pb-12 pt-4">
+          <div className="flex w-full flex-col sm:flex-row gap-6 sm:gap-4 items-start sm:items-center justify-between pb-12 pt-4">
             <div className="h-[64px] w-40 rounded-full bg-gray-300" />
             <div className="h-[66px] w-[262px] rounded-full bg-gray-300" />
           </div>
@@ -95,17 +95,17 @@ export async function ProductDetails({ idStr }: ProductDetailsProp) {
 
   return (
     <CartContextWrapper>
-      <main className="relative flex min-h-screen items-center justify-center py-10">
+      <main className="relative flex min-h-screen items-center justify-center py-24">
         <HomeButton />
         <CartButton />
-        <div className="flex w-full max-w-6xl sm:items-start sm:justify-start flex-col sm:flex-row gap-10 px-2">
+        <div className="flex flex-col xl:flex-row max-w-6xl items-center sm:items-start sm:justify-start gap-10 px-2">
           <Slider images={product.images} alt={product.title} />
 
           {/* right side */}
-          <div className="flex min-h-[516px] grow flex-col justify-between gap-3">
+          <div className="flex min-h-[516px] w-full grow flex-col justify-between gap-3">
             {/* name and rating */}
             <div className="flex grow items-end">
-              <div className="flex w-full items-center justify-between gap-16">
+              <div className="flex w-full flex-col sm:flex-row items-center justify-between gap-16">
                 <h1 className="text-[48px] font-[600]">{product.title}</h1>
                 <Rating rating={product.rating} />
               </div>
@@ -139,7 +139,7 @@ export async function ProductDetails({ idStr }: ProductDetailsProp) {
             </div>
 
             {/* price */}
-            <div className="flex grow justify-between">
+            <div className="flex flex-col sm:flex-row grow justify-between">
               <div className="text-[64px] font-[600] text-[#323232]">
                 {product.price} $
               </div>

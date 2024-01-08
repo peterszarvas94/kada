@@ -17,8 +17,6 @@ type Context = {
   setOverlay: Dispatch<SetStateAction<Overlay>>;
 
   user: User | null;
-
-  authLoaded: boolean;
 };
 
 export const AuthContext = createContext<Context | null>(null);
@@ -30,12 +28,10 @@ interface Props {
 export function AuthContextProvider({ children }: Props) {
   const [overlay, setOverlay] = useState<Overlay>("none");
   const [user, setUser] = useState<User | null>(null);
-  const [authLoaded, setAuthLoaded] = useState<boolean>(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
-      setAuthLoaded(true);
     });
 
     return () => {
@@ -50,8 +46,6 @@ export function AuthContextProvider({ children }: Props) {
         setOverlay,
 
         user,
-
-        authLoaded,
       }}
     >
       {children}

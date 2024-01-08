@@ -8,8 +8,8 @@ export default function HomePage() {
     <CartContextWrapper>
       <main className="relative">
         <CartButton />
-        <div className="pb-[40px] pt-[60px]">
-          <h1 className="flex justify-center text-[48px] font-[600]">
+        <div className="pb-[40px] pt-24 sm:pt-[60px]">
+          <h1 className="flex justify-center text-3xl sm:text-[48px] font-[600]">
             See Products
           </h1>
         </div>

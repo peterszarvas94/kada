@@ -18,7 +18,7 @@ export function Slider({ images, alt }: SliderProps) {
       <div className="flex">
         <button
           aria-label="previous image"
-          className="flex w-14 items-center justify-start"
+          className="flex w-8 sm:w-14 items-center justify-start"
           onClick={() => {
             if (index > 0) {
               setIndex(index - 1);
@@ -27,7 +27,7 @@ export function Slider({ images, alt }: SliderProps) {
         >
           <ChevronLeft enabled={index > 0} />
         </button>
-        <div className="relative h-[502px] w-[481px]">
+        <div className="relative h-52 w-52 sm:h-[502px] sm:w-[481px]">
           {images.map((image, i) => (
             <Image
               key={i}
@@ -44,7 +44,7 @@ export function Slider({ images, alt }: SliderProps) {
         </div>
         <button
           aria-label="next image"
-          className="flex w-14 items-center justify-end"
+          className="flex w-8 sm:w-14 items-center justify-end"
           onClick={() => {
             if (index < images.length - 1) {
               setIndex(index + 1);

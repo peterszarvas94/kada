@@ -12,7 +12,7 @@ import { SignUpForm } from "./sign-up-form";
 
 export function Cart() {
   const { cart, cartLoaded } = useCartContext();
-  const { user, authLoaded, overlay, setOverlay } = useAuthContext();
+  const { user, overlay, setOverlay } = useAuthContext();
 
   if (overlay === "sign-in-form" && !user) {
     return <SignInForm />;
@@ -27,8 +27,8 @@ export function Cart() {
       <HomeButton />
       {user ? <SignOutButton /> : <SignInButton />}
 
-      <div className="pb-[40px] pt-[60px]">
-        <h1 className="flex justify-center text-[48px] font-[600]">
+      <div className="pb-[40px] pt-24 sm:pt-[60px]">
+        <h1 className="flex text-center justify-center text-3xl sm:text-[48px] font-[600]">
           Shopping Cart
         </h1>
       </div>
@@ -37,8 +37,8 @@ export function Cart() {
         <CartLoading />
       ) : (
         <div className="flex w-full justify-center p-10">
-          <div className="flex w-full max-w-6xl gap-10">
-            <div className="flex grow flex-col gap-4 ">
+          <div className="flex flex-col sm:flex-row w-full max-w-6xl gap-10">
+            <div className="flex grow flex-col gap-4">
               {cart.length === 0 ? (
                 <div className="flex h-[102px] items-center rounded-[6.46px] border-[0.65px] border-[#DBDBDB] px-8 text-lg">
                   No items in cart
