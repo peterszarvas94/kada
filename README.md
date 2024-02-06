@@ -1,10 +1,5 @@
-# Mock Webshop
+# Fake Webshop
 
-This is my solution to the Kada Solutuions hiring task
+Hosted in [https://nextjs-fake-webshop.vercel.app/](https://nextjs-fake-webshop.vercel.app/)
 
-Hosted in [Vercel](https://kada.vercel.app)
-
-## TODO
-
-- [ ] firebase auth
-- [ ] purchase save to firestore
+Auth with firebase.
